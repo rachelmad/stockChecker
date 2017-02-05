@@ -7,7 +7,7 @@ node_modules
 coverage
 
 # production
-static
+static/bundle.js
 
 # misc
 .DS_Store
