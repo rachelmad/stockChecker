@@ -8,7 +8,8 @@ export default class StockMain extends Component {
 		super(props);
 
 		this.state = {
-			stockData: null
+			stockData: null,
+			showStockDetails: false
 		}
 
 		this.getData = this.getData.bind(this);
@@ -21,7 +22,8 @@ export default class StockMain extends Component {
 	    $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=")
 			.done((data) => {
 				this.setState({
-					stockData: data.query.results.quote
+					stockData: data.query.results.quote,
+					showStockDetails: true
 				});
 			})
 			.fail((jqxhr, textStatus, error) => {
@@ -30,10 +32,17 @@ export default class StockMain extends Component {
 	}
 
 	render() {
+		var stockDetails = null;
+		if (this.state.showStockDetails) {
+			stockDetails = <StockDetails stockData={this.state.stockData}></StockDetails>
+		} else {
+			stockDetails = null;
+		}
+
 		return (
 			<div>
-				<StockRequest onSubmit={this.getData}></StockRequest>
-				<StockDetails stockData={this.state.stockData}></StockDetails>
+				<StockRequest onSubmit={this.getData}></StockRequest><br />
+				{stockDetails}
 			</div>
 		);
 	}

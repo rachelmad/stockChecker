@@ -1,0 +1,43 @@
+body {
+	background-color: #52b4af;
+	padding: 15px;
+}
+
+.mdl-card__actions.mdl-card--border {
+    border-top: 1px solid rgba(0,0,0,.01);
+}
+
+.mdl-card__title-text {
+	text-transform: uppercase;
+	font-size: 20px;
+}
+
+.mdl-button--accent.mdl-button--accent  {
+	color: #9c6a8d;
+}
+
+.card-title {
+	background-color: #b6dedc;
+}
+
+.uppercase {
+	text-transform: uppercase;
+}
+
+/*body {
+	background-color: #48372f;
+	padding: 15px;
+}
+
+.mdl-card__actions.mdl-card--border {
+    border-top: 1px solid rgba(0,0,0,.01);
+}
+
+.mdl-card__title-text {
+	text-transform: uppercase;
+	font-size: 20px;
+}
+
+.card-title {
+	background-color: #fee202;
+}*/
