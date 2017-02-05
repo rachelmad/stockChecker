@@ -8,7 +8,6 @@ export default class StockRequest extends Component {
 			ticker: ''
 		}
 
-		this.getData = this.getData.bind(this);
 		this.handleTickerChange = this.handleTickerChange.bind(this);
 	}
 
@@ -16,13 +15,6 @@ export default class StockRequest extends Component {
 		this.setState({
 			ticker: event.target.value
 		})
-	}
-
-	getData() {
-		$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quoteslist%20where%20symbol%20in%20(%22YHOO%22%2C%22AAPL%22%2C%22GOOG%22%2C%22MSFT%22)&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=")
-			.done((data) => {
-				console.log(data);
-			});
 	}
 
 	render() {
@@ -43,7 +35,7 @@ export default class StockRequest extends Component {
 						<span className="mdl-textfield__error">Input is not a number!</span>
 					</div>
 				</form>
-				<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={this.getData}>
+				<button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onClick={() => this.props.onSubmit(this.state.ticker)}>
 				  Get Data
 				</button>
 			</div>

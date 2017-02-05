@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import StockRequest from "./StockRequest";
+import StockMain from "./StockMain";
 
 ReactDOM.render(
-  <StockRequest></StockRequest>,
+  <StockMain></StockMain>,
   document.getElementById('root')
 );
