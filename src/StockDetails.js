@@ -1,5 +1,7 @@
 import { Component } from 'react';
 
+import PhotoButtons from './PhotoButtons';
+
 export default class StockDetails extends Component {
 	constructor(props) {
 		super(props);
@@ -21,6 +23,37 @@ export default class StockDetails extends Component {
 		}
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.stockData.symbol != prevState.ticker) {
+			this.setState({
+				ticker: this.props.stockData.symbol,
+				name: this.props.stockData.Name,
+				price: this.props.stockData.LastTradePriceOnly,
+				bookValue: this.props.stockData.BookValue,
+				peg: this.props.stockData.PEGRatio,
+				dividend: this.props.stockData.DividendYield,
+				targetPrice: this.props.stockData.OneyrTargetPrice,
+				shortInterest: this.props.stockData.ShortRatio
+			})
+			this.getImages();
+		}
+	}
+
+	getImages() {
+		var logoURL = "http://www.nasdaq.com//logos/" + this.state.ticker + ".GIF";
+		var recommendationURL = "http://www.nasdaq.com/charts/" + this.state.ticker + "_smallcnb.jpeg";
+		var companyIndustryEarningsURL = "http://www.nasdaq.com/charts/" + this.state.ticker + "_eg.jpeg"
+		var growthURL = "http://www.nasdaq.com//charts/" + this.state.ticker + "_egr.jpeg"
+		var earningsSurpriseURL = "http://www.nasdaq.com//charts/" + this.state.ticker + "_sur.jpeg"
+		this.setState({
+			logo: logoURL,
+			recommendation: recommendationURL,
+			companyIndustryEarnings: companyIndustryEarningsURL,
+			growth: growthURL,
+			earningsSurprise: earningsSurpriseURL
+		})
+	}
+
 	render() {
 		return (
 			<div className="mdl-card mdl-shadow--2dp">
@@ -39,6 +72,7 @@ export default class StockDetails extends Component {
 					<span>Short Interest Ratio: {this.state.shortInterest}</span><br />
 					<span>Analyst Recommendations:</span><br />
 					<img src={this.state.recommendation}></img><br />
+					<PhotoButtons></PhotoButtons>
 					<span>Company vs Industry Earnings:</span><br />
 					<img src={this.state.companyIndustryEarnings}></img><br />
 					<span>Growth:</span><br />

@@ -1,6 +1,9 @@
 body {
 	background-color: #52b4af;
-	padding: 15px;
+}
+
+.mdl-card {
+	width: 100%;
 }
 
 .mdl-card__actions.mdl-card--border {
@@ -16,6 +19,11 @@ body {
 	color: #9c6a8d;
 }
 
+.space-around {
+	display: flex;
+	justify-content: space-around;
+}
+
 .card-title {
 	background-color: #b6dedc;
 }
@@ -24,20 +32,10 @@ body {
 	text-transform: uppercase;
 }
 
-/*body {
-	background-color: #48372f;
-	padding: 15px;
+.lowercase {
+	text-transform: lowercase;
 }
 
-.mdl-card__actions.mdl-card--border {
-    border-top: 1px solid rgba(0,0,0,.01);
+.no-top-margin {
+	margin-top: 0;
 }
-
-.mdl-card__title-text {
-	text-transform: uppercase;
-	font-size: 20px;
-}
-
-.card-title {
-	background-color: #fee202;
-}*/

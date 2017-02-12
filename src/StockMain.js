@@ -2,6 +2,7 @@ import { Component } from 'react';
 
 import StockRequest from './StockRequest';
 import StockDetails from './StockDetails';
+import StockAnalysis from './StockAnalysis';
 
 export default class StockMain extends Component {
 	constructor(props) {
@@ -9,21 +10,23 @@ export default class StockMain extends Component {
 
 		this.state = {
 			stockData: null,
-			showStockDetails: false
+			showStockDetails: false,
+			amount: null
 		}
 
 		this.getData = this.getData.bind(this);
 	}
 
-	getData(ticker) {
-		var url = "http://query.yahooapis.com/v1/public/yql";
+	getData(ticker, amountEntered) {
+		var url = "https://query.yahooapis.com/v1/public/yql";
 	    var data = encodeURIComponent("select * from yahoo.finance.quotes where symbol in ('" + ticker + "')");
-	    
-	    $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=")
+
+	    $.getJSON(url, 'q=' + data + "&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
 			.done((data) => {
 				this.setState({
 					stockData: data.query.results.quote,
-					showStockDetails: true
+					showStockDetails: true, 
+					amount: amountEntered
 				});
 			})
 			.fail((jqxhr, textStatus, error) => {
@@ -33,16 +36,26 @@ export default class StockMain extends Component {
 
 	render() {
 		var stockDetails = null;
+		var stockAnalysis = null;
 		if (this.state.showStockDetails) {
-			stockDetails = <StockDetails stockData={this.state.stockData}></StockDetails>
+			stockDetails = <StockDetails stockData={this.state.stockData}></StockDetails>;
+			stockAnalysis = <StockAnalysis stockData={this.state.stockData} amount={this.state.amount}></StockAnalysis>;
 		} else {
 			stockDetails = null;
+			stockAnalysis = null;
 		}
 
 		return (
-			<div>
-				<StockRequest onSubmit={this.getData}></StockRequest><br />
-				{stockDetails}
+			<div className="mdl-grid">
+				<div className="mdl-cell mdl-cell--4-col">
+					<StockRequest onSubmit={this.getData}></StockRequest>
+				</div>
+				<div className="mdl-cell mdl-cell--4-col">
+					{stockDetails}
+				</div>
+				<div className="mdl-cell mdl-cell--4-col">
+					{stockAnalysis}
+				</div>
 			</div>
 		);
 	}
