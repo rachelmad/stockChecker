@@ -72,13 +72,20 @@ export default class StockDetails extends Component {
 					<span>Short Interest Ratio: {this.state.shortInterest}</span><br />
 					<span>Analyst Recommendations:</span><br />
 					<img src={this.state.recommendation}></img><br />
-					<PhotoButtons></PhotoButtons>
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="recommendation"></PhotoButtons><br />
 					<span>Company vs Industry Earnings:</span><br />
 					<img src={this.state.companyIndustryEarnings}></img><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="companyIndustryEarnings"></PhotoButtons><br />
 					<span>Growth:</span><br />
 					<img src={this.state.growth} width="300"></img><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="growth"></PhotoButtons><br />
 					<span>Earnings Surprises:</span><br />
 					<img src={this.state.earningsSurprise} width="300"></img><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="earningsSurprise"></PhotoButtons><br />
 				</div>
 			</div>
 		);

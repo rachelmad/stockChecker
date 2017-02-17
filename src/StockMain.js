@@ -11,10 +11,12 @@ export default class StockMain extends Component {
 		this.state = {
 			stockData: null,
 			showStockDetails: false,
-			amount: null
+			amount: null,
+			photoValues: null
 		}
 
 		this.getData = this.getData.bind(this);
+		this.updatePhotoDetails = this.updatePhotoDetails.bind(this);
 	}
 
 	getData(ticker, amountEntered) {
@@ -34,12 +36,18 @@ export default class StockMain extends Component {
 			});
 	}
 
+	updatePhotoDetails(type, e) {
+		console.log(type, e.target.value);
+	}
+
 	render() {
 		var stockDetails = null;
 		var stockAnalysis = null;
 		if (this.state.showStockDetails) {
-			stockDetails = <StockDetails stockData={this.state.stockData}></StockDetails>;
-			stockAnalysis = <StockAnalysis stockData={this.state.stockData} amount={this.state.amount}></StockAnalysis>;
+			stockDetails = <StockDetails stockData={this.state.stockData} 
+										 onPhotoUpdate={this.updatePhotoDetails}></StockDetails>;
+			stockAnalysis = <StockAnalysis stockData={this.state.stockData} 
+										   amount={this.state.amount}></StockAnalysis>;
 		} else {
 			stockDetails = null;
 			stockAnalysis = null;

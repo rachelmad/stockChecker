@@ -68,7 +68,6 @@ export default class StockRequest extends Component {
 					  Get Data
 					</button>
 				</div>
-				
 			</div>
 		);
 	}
