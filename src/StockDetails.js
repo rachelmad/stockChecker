@@ -56,11 +56,11 @@ export default class StockDetails extends Component {
 
 	render() {
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
-				<div className="mdl-card__title card-title">
-					<h5 className="mdl-card__title-text">Stock Details</h5>
+			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover">
+				<div className="uk-card-header">
+					<h5 className="uk-card-title">Stock Details</h5>
 				</div>
-				<div className="mdl-card__supporting-text">
+				<div className="uk-card-body">
 					<img src={this.state.logo}></img><br />
 					<span>Name: {this.state.name}</span><br />
 					<span>Ticker: <span className="uppercase">{this.state.ticker}</span></span><br />

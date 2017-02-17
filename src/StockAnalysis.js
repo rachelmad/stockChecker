@@ -77,11 +77,11 @@ export default class StockMain extends Component {
 
 	render() {
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
-				<div className="mdl-card__title card-title">
-					<h5 className="mdl-card__title-text">Stock Analysis</h5>
+			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover">
+				<div className="uk-card-header">
+					<h5 className="uk-card-title">Stock Analysis</h5>
 				</div>
-				<div className="mdl-card__supporting-text">
+				<div className="uk-card-body">
 					<h5 className="no-top-margin">Value</h5>
 					<span>Based on the PEG, this stock is <span className="lowercase">{this.state.pegAnalysis}</span>.</span><br />
 					<span>Based on the book value, this stock is <span className="lowercase">{this.state.priceVsBookValue}</span>.</span><br />

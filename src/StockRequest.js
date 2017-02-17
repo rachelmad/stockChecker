@@ -27,8 +27,8 @@ export default class StockRequest extends Component {
 
 	render() {
 		var cardTitle = 
-			<div className="mdl-card__title card-title">
-				<h5 className="mdl-card__title-text">Stock Info</h5>
+			<div className="uk-card-header">
+				<h5 className="uk-card-title">Stock Info</h5>
 			</div>;
 
 		var tickerInput = 
@@ -54,21 +54,20 @@ export default class StockRequest extends Component {
 			</div>;
 
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
+			<div className="uk-card uk-card-small uk-card-body uk-card-primary uk-card-hover">
 				{cardTitle}
-				<div className="mdl-card__supporting-text mdl-card--border">
+				<div className="uk-card-body">
 					<form>
 						{tickerInput}
 						{amountInput}	
 					</form>
 				</div>
-				<div className="mdl-card__actions mdl-card--border">
+				<div className="uk-card-footer">
 					<button className="mdl-button mdl-js-button mdl-button--accent mdl-js-ripple-effect" 
 							onClick={() => this.props.onSubmit(this.state.ticker, this.state.amount)}>
 					  Get Data
 					</button>
 				</div>
-				
 			</div>
 		);
 	}
