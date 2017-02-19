@@ -60,7 +60,7 @@ export default class StockDetails extends Component {
 				<div className="uk-card-header">
 					<span className="uk-card-title">Stock Details</span>
 				</div>
-				<div className="mdl-card__supporting-text">
+				<div className="uk-card-body">
 					<img src={this.state.logo}></img><br />
 					<span>Name: {this.state.name}</span><br />
 					<span>Ticker: <span className="uppercase">{this.state.ticker}</span></span><br />
@@ -71,6 +71,7 @@ export default class StockDetails extends Component {
 					<span>Target Price: {this.state.targetPrice}</span><br />
 					<span>Short Interest Ratio: {this.state.shortInterest}</span><br />
 					<span>Analyst Recommendations:</span><br />
+					<hr />
 					<img src={this.state.recommendation}></img><br />
 					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
 					<hr />

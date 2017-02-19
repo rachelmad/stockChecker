@@ -81,16 +81,18 @@ export default class StockMain extends Component {
 				<div className="uk-card-header">
 					<span className="uk-card-title">Stock Analysis</span>
 				</div>
-				<div className="mdl-card__supporting-text">
-					<h5 className="no-top-margin">Value</h5>
-					<span>Based on the PEG, this stock is <span className="lowercase">{this.state.pegAnalysis}</span>.</span><br />
-					<span>Based on the book value, this stock is <span className="lowercase">{this.state.priceVsBookValue}</span>.</span><br />
-					
-					<h5>Dividends</h5>
-					<span>This stock has <span className="lowercase">{this.state.dividendAnalysis}</span> dividend.</span><br />
-					
-					<h5>Profit Potential</h5>
-					<span>If you invest {this.props.amount}, you make {this.state.possibleTotal} if they reach the target price.</span>
+				<div className="uk-card-body">
+					<dl className="uk-description-list">
+					    <dt>Value</dt>
+					    <dd>Based on the PEG, this stock is <span className="lowercase">{this.state.pegAnalysis}</span></dd>
+					    <dd>Based on the book value, this stock is <span className="lowercase">{this.state.priceVsBookValue}</span></dd>
+					    <br />
+					    <dt>Dividends</dt>
+					    <dd>This stock has <span className="lowercase">{this.state.dividendAnalysis}</span> dividend</dd>
+					    <br />
+					    <dt>Profit Potential</dt>
+					    <dd>If you invest {this.props.amount}, you make {this.state.possibleTotal} if they reach the target price</dd>
+					</dl>
 				</div>
 			</div>
 		);
