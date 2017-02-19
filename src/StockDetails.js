@@ -56,7 +56,7 @@ export default class StockDetails extends Component {
 
 	render() {
 		return (
-			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover">
+			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover uk-container-small">
 				<div className="uk-card-header">
 					<h5 className="uk-card-title">Stock Details</h5>
 				</div>
@@ -71,12 +71,16 @@ export default class StockDetails extends Component {
 					<span>Target Price: {this.state.targetPrice}</span><br />
 					<span>Short Interest Ratio: {this.state.shortInterest}</span><br />
 					<span>Analyst Recommendations:</span><br />
+					<hr />
 					<img src={this.state.recommendation}></img><br />
 					<PhotoButtons></PhotoButtons>
+					<hr />
 					<span>Company vs Industry Earnings:</span><br />
 					<img src={this.state.companyIndustryEarnings}></img><br />
+					<hr />
 					<span>Growth:</span><br />
 					<img src={this.state.growth} width="300"></img><br />
+					<hr />
 					<span>Earnings Surprises:</span><br />
 					<img src={this.state.earningsSurprise} width="300"></img><br />
 				</div>
