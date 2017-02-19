@@ -11,63 +11,18 @@ export default class PhotoButtons extends Component {
 
 	render() {
 		return (
-			<div className="space-around">
-				<div>
-		   		   1
-		      		<label className="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" 
-		      			   htmlFor="list-option-1">
-		        		<input type="radio" 
-		        			   id="list-option-1" 
-		        			   className="mdl-radio__button" 
-		        			   value="1"
-		        			   onChange={this.props.onUpdate.bind(this, this.state.type)} />
-		      		</label>
-			    </div>
-			    <div>
-		      		2
-		      		<label className="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" 
-		      			   htmlFor="list-option-2">
-		        		<input type="radio" 
-		        			   id="list-option-2" 
-		        			   className="mdl-radio__button" 
-		        			   value="2"
-		        			   onChange={this.props.onUpdate.bind(this, this.state.type)} />
-		      		</label>
-			    </div>
-			    <div>
-		      		3
-		      		<label className="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" 
-		      			   htmlFor="list-option-3">
-		        		<input type="radio" 
-		        			   id="list-option-3" 
-		        			   className="mdl-radio__button" 
-		        			   value="3"
-		        			   onChange={this.props.onUpdate.bind(this, this.state.type)} />
-		      		</label>
-			    </div>
-			    <div>
-		      		4
-		      		<label className="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" 
-		      			   htmlFor="list-option-4">
-		        		<input type="radio" 
-		        			   id="list-option-4" 
-		        			   className="mdl-radio__button" 
-		        			   value="4"
-		        			   onChange={this.props.onUpdate.bind(this, this.state.type)} />
-		      		</label>
-			    </div>
-			    <div>
-		      		5
-		      		<label className="demo-list-radio mdl-radio mdl-js-radio mdl-js-ripple-effect" 
-		      			   htmlFor="list-option-5">
-		        		<input type="radio" 
-		        			   id="list-option-5" 
-		        			   className="mdl-radio__button" 
-		        			   value="5"
-		        			   onChange={this.props.onUpdate.bind(this, this.state.type)} />
-		      		</label>
-		    	</div>
-		    </div>
+			<div className="uk-button-group">
+			    <button className="uk-button uk-button-primary uk-padding-small	uk-padding-remove-vertical"
+			    		onClick={(e) => this.props.onUpdate(this.state.type, 1)}>1</button>
+			    <button className="uk-button uk-button-primary uk-padding-small	uk-padding-remove-vertical"
+			    		onClick={(e) => this.props.onUpdate(this.state.type, 2)}>2</button>
+			    <button className="uk-button uk-button-primary uk-padding-small	uk-padding-remove-vertical"
+			    		onClick={(e) => this.props.onUpdate(this.state.type, 3)}>3</button>
+			    <button className="uk-button uk-button-primary uk-padding-small	uk-padding-remove-vertical"
+			    		onClick={(e) => this.props.onUpdate(this.state.type, 4)}>4</button>
+			    <button className="uk-button uk-button-primary uk-padding-small	uk-padding-remove-vertical"
+			    		onClick={(e) => this.props.onUpdate(this.state.type, 5)}>5</button>
+			</div>
 		)
 	}
 }

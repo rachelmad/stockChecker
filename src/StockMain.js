@@ -36,8 +36,8 @@ export default class StockMain extends Component {
 			});
 	}
 
-	updatePhotoDetails(type, e) {
-		console.log(type, e.target.value);
+	updatePhotoDetails(type, value) {
+		console.log(type, value);
 	}
 
 	render() {

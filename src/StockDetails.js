@@ -56,9 +56,9 @@ export default class StockDetails extends Component {
 
 	render() {
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
-				<div className="mdl-card__title card-title">
-					<h5 className="mdl-card__title-text">Stock Details</h5>
+			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover uk-container-small">
+				<div className="uk-card-header">
+					<span className="uk-card-title">Stock Details</span>
 				</div>
 				<div className="mdl-card__supporting-text">
 					<img src={this.state.logo}></img><br />
@@ -72,20 +72,19 @@ export default class StockDetails extends Component {
 					<span>Short Interest Ratio: {this.state.shortInterest}</span><br />
 					<span>Analyst Recommendations:</span><br />
 					<img src={this.state.recommendation}></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
-								  type="recommendation"></PhotoButtons><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<hr />
 					<span>Company vs Industry Earnings:</span><br />
 					<img src={this.state.companyIndustryEarnings}></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
-								  type="companyIndustryEarnings"></PhotoButtons><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<hr />
 					<span>Growth:</span><br />
 					<img src={this.state.growth} width="300"></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
-								  type="growth"></PhotoButtons><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<hr />
 					<span>Earnings Surprises:</span><br />
 					<img src={this.state.earningsSurprise} width="300"></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
-								  type="earningsSurprise"></PhotoButtons><br />
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
 				</div>
 			</div>
 		);

@@ -77,9 +77,9 @@ export default class StockMain extends Component {
 
 	render() {
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
-				<div className="mdl-card__title card-title">
-					<h5 className="mdl-card__title-text">Stock Analysis</h5>
+			<div className="uk-card uk-card-small uk-card-body uk-card-default uk-card-hover uk-container-small">
+				<div className="uk-card-header">
+					<span className="uk-card-title">Stock Analysis</span>
 				</div>
 				<div className="mdl-card__supporting-text">
 					<h5 className="no-top-margin">Value</h5>

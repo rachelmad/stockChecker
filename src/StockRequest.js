@@ -27,8 +27,9 @@ export default class StockRequest extends Component {
 
 	render() {
 		var cardTitle = 
-			<div className="mdl-card__title card-title">
-				<h5 className="mdl-card__title-text">Stock Info</h5>
+			<div className="uk-card-header">
+				<span className="uk-card-title">Stock Info</span>
+				<hr />
 			</div>;
 
 		var tickerInput = 
@@ -54,7 +55,7 @@ export default class StockRequest extends Component {
 			</div>;
 
 		return (
-			<div className="mdl-card mdl-shadow--2dp">
+			<div className="uk-card uk-card-small uk-card-body uk-card-primary uk-card-hover">
 				{cardTitle}
 				<div className="mdl-card__supporting-text mdl-card--border">
 					<form>
