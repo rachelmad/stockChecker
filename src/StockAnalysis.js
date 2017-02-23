@@ -5,65 +5,77 @@ export default class StockMain extends Component {
 		super(props);
 
 		this.state = {
+			ticker: null,
 			pegAnalysis: null,
 			priceVsBookValue: null,
 			dividendAnalysis: null,
 			amount: null,
-			possibleTotal: null
+			possibleTotal: null,
+			photoValues: {},
+			photoValuesChange: false
 		}
 
 		this.getAnalysis = this.getAnalysis.bind(this);
 		this.getStockResults = this.getStockResults.bind(this);
+		this.getLowValue = this.getLowValue.bind(this);
+		this.getHighValue = this.getHighValue.bind(this);
 	}
 
 	componentDidMount() {
 		this.getAnalysis();
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		if (this.props.stockData.symbol != prevState.ticker ||
+			this.props.photoValuesChange != prevState.photoValuesChange) {
+			this.setState({
+				ticker: this.props.stockData.symbol,
+				photoValues: this.props.photoValues,
+				photoValuesChange: this.props.photoValuesChange
+			});
+			this.getAnalysis();
+		}
+	}
+
 	getAnalysis() {
 		this.setState({
+			pegAnalysis: this.getLowValue(this.props.stockData.PEGRatio, 1, -1, 2),
+			priceVsBookValue: this.getLowValue(this.props.stockData.LastTradePriceOnly, 
+				this.props.stockData.BookValue, 0.5 * this.props.stockData.BookValue, 
+				2 * this.props.stockData.BookValue),
+			dividendAnalysis: this.getHighValue(this.props.stockData.DividendYield, 5, 7, 1),
 			amount: this.props.amount
-		})
-
-		if (this.props.stockData.PEGRatio < -2) {
-			this.setState({
-				pegAnalysis: "Very undervalued"
-			});
-		} else if (this.props.stockData.PEGRatio < 1) {
-			this.setState({
-				pegAnalysis: "Undervalued"
-			});
-		} else if (this.props.stockData.PEGRatio < 3) {
-			this.setState({
-				pegAnalysis: "Overvalued"
-			});
-		} else {
-			this.setState({
-				pegAnalysis: "Very overvalued"
-			});
-		}
-
-		if (this.props.stockData.LastTradePriceOnly > this.props.stockData.BookValue) {
-			this.setState({
-				priceVsBookValue: "Overpriced"
-			})
-		} else {
-			this.setState({
-				priceVsBookValue: "Underpriced"
-			})
-		}
-
-		if (this.props.stockData.DividendYield > 5) {
-			this.setState({
-				dividendAnalysis: "Good"
-			});
-		} else {
-			this.setState({
-				dividendAnalysis: "Bad"
-			})
-		}
+		});
 
 		this.getStockResults();
+	}
+
+	getHighValue(original, point, veryGood, veryBad) {
+		if (original == null || original == undefined) {
+			return 0;
+		} else if (original < veryBad) {
+			return -2;
+		} else if (original < point) {
+			return -1;		
+		} else if (original < veryGood) {
+			return 1;
+		} else {
+			return 2;
+		}		 
+	}
+
+	getLowValue(original, point, veryGood, veryBad) {
+		if (original == null || original == undefined) {
+			return 0;
+		} else if (original > veryBad) {
+			return -2;
+		} else if (original > point) {
+			return -1;		
+		} else if (original > veryGood) {
+			return 1;
+		} else {
+			return 2;
+		}		 
 	}
 
 	getStockResults() {

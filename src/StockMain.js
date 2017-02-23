@@ -12,7 +12,8 @@ export default class StockMain extends Component {
 			stockData: null,
 			showStockDetails: false,
 			amount: null,
-			photoValues: null
+			photoValues: {},
+			photoValuesChange: false
 		}
 
 		this.getData = this.getData.bind(this);
@@ -37,7 +38,38 @@ export default class StockMain extends Component {
 	}
 
 	updatePhotoDetails(type, value) {
-		console.log(type, value);
+		var photoValuesCopy = this.state.photoValues;
+
+		switch(type) {
+			case "recommendations":
+				photoValuesCopy.recommendations = value;
+				this.setState({
+					photoValues: photoValuesCopy,
+					photoValuesChange: !this.state.photoValuesChange
+				});
+				break;
+			case "companyIndustryEarnings":
+				photoValuesCopy.companyIndustryEarnings = value;
+				this.setState({
+					photoValues: photoValuesCopy,
+					photoValuesChange: !this.state.photoValuesChange
+				});
+				break;
+			case "growth":
+				photoValuesCopy.growth = value;
+				this.setState({
+					photoValues: photoValuesCopy,
+					photoValuesChange: !this.state.photoValuesChangey
+				});
+				break;
+			case "earningsSurprises":
+				photoValuesCopy.earningsSurprises = value;
+				this.setState({
+					photoValues: photoValuesCopy,
+					photoValuesChange: !this.state.photoValuesChange
+				});
+				break;
+		}
 	}
 
 	render() {
@@ -47,7 +79,9 @@ export default class StockMain extends Component {
 			stockDetails = <StockDetails stockData={this.state.stockData} 
 										 onPhotoUpdate={this.updatePhotoDetails}></StockDetails>;
 			stockAnalysis = <StockAnalysis stockData={this.state.stockData} 
-										   amount={this.state.amount}></StockAnalysis>;
+										   amount={this.state.amount}
+										   photoValues={this.state.photoValues}
+										   photoValuesChange={this.state.photoValuesChange}></StockAnalysis>;
 		} else {
 			stockDetails = null;
 			stockAnalysis = null;

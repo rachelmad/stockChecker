@@ -73,19 +73,23 @@ export default class StockDetails extends Component {
 					<span>Analyst Recommendations:</span><br />
 					<hr />
 					<img src={this.state.recommendation}></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="recommendations"></PhotoButtons>
 					<hr />
 					<span>Company vs Industry Earnings:</span><br />
 					<img src={this.state.companyIndustryEarnings}></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="companyIndustryEarnings"></PhotoButtons>
 					<hr />
 					<span>Growth:</span><br />
 					<img src={this.state.growth} width="300"></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="growth"></PhotoButtons>
 					<hr />
 					<span>Earnings Surprises:</span><br />
 					<img src={this.state.earningsSurprise} width="300"></img><br />
-					<PhotoButtons onUpdate={this.props.onPhotoUpdate}></PhotoButtons>
+					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
+								  type="earningsSurprises"></PhotoButtons>
 				</div>
 			</div>
 		);
