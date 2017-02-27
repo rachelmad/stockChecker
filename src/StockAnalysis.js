@@ -12,13 +12,19 @@ export default class StockMain extends Component {
 			amount: null,
 			possibleTotal: null,
 			photoValues: {},
-			photoValuesChange: false
+			photoValuesChange: false,
+			recommendationValue: null,
+			recommendations: null,
+			companyIndustryEarnings: null,
+			growth: null,
+			earningsSurprises: null
 		}
 
 		this.getAnalysis = this.getAnalysis.bind(this);
 		this.getStockResults = this.getStockResults.bind(this);
 		this.getLowValue = this.getLowValue.bind(this);
 		this.getHighValue = this.getHighValue.bind(this);
+		this.getPhotoAnalysis = this.getPhotoAnalysis.bind(this);
 	}
 
 	componentDidMount() {
@@ -26,14 +32,20 @@ export default class StockMain extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.props.stockData.symbol != prevState.ticker ||
-			this.props.photoValuesChange != prevState.photoValuesChange) {
+		if (this.props.stockData.symbol != prevState.ticker) {
 			this.setState({
-				ticker: this.props.stockData.symbol,
+				ticker: this.props.stockData.symbol
+			});
+
+			this.getAnalysis();
+		}
+		if (this.props.photoValuesChange != prevState.photoValuesChange &&
+			this.props.photoValues) {
+			this.setState({
 				photoValues: this.props.photoValues,
 				photoValuesChange: this.props.photoValuesChange
 			});
-			this.getAnalysis();
+			this.getPhotoAnalysis();
 		}
 	}
 
@@ -50,8 +62,17 @@ export default class StockMain extends Component {
 		this.getStockResults();
 	}
 
+	getPhotoAnalysis() {
+		this.setState({
+			recommendations: this.props.photoValues.recommendations,
+			companyIndustryEarnings: this.props.photoValues.companyIndustryEarnings,
+			growth: this.props.photoValues.growth,
+			earningsSurprises: this.props.photoValues.earningsSurprises
+		})
+	}
+
 	getHighValue(original, point, veryGood, veryBad) {
-		if (original == null || original == undefined) {
+		if (original) {
 			return 0;
 		} else if (original < veryBad) {
 			return -2;
@@ -65,7 +86,7 @@ export default class StockMain extends Component {
 	}
 
 	getLowValue(original, point, veryGood, veryBad) {
-		if (original == null || original == undefined) {
+		if (original) {
 			return 0;
 		} else if (original > veryBad) {
 			return -2;
@@ -95,14 +116,19 @@ export default class StockMain extends Component {
 				</div>
 				<div className="uk-card-body">
 					<dl className="uk-description-list">
-					    <dt>Value</dt>
+						<dt>Analyst recommendations</dt>
+					    <dd>Analysts recommend <span className="lowercase">{this.state.recommendations}</span></dd>
+					    <dd>Expectations have previously been <span className="lowercase">{this.state.earningsSurprises}</span></dd>
+					    <dt>Company status</dt>
 					    <dd>Based on the PEG, this stock is <span className="lowercase">{this.state.pegAnalysis}</span></dd>
 					    <dd>Based on the book value, this stock is <span className="lowercase">{this.state.priceVsBookValue}</span></dd>
+					    <dd>The company has <span className="lowercase">{this.state.companyIndustryEarnings}</span> industry earnings</dd>
+					    <dd>Growth is expected to be <span className="lowercase">{this.state.growth}</span></dd>
 					    <br />
 					    <dt>Dividends</dt>
 					    <dd>This stock has <span className="lowercase">{this.state.dividendAnalysis}</span> dividend</dd>
 					    <br />
-					    <dt>Profit Potential</dt>
+					    <dt>Profit potential</dt>
 					    <dd>If you invest {this.props.amount}, you make {this.state.possibleTotal} if they reach the target price</dd>
 					</dl>
 				</div>

@@ -39,34 +39,35 @@ export default class StockMain extends Component {
 
 	updatePhotoDetails(type, value) {
 		var photoValuesCopy = this.state.photoValues;
+		var changeNegate = !this.state.photoValuesChange;
 
 		switch(type) {
 			case "recommendations":
 				photoValuesCopy.recommendations = value;
 				this.setState({
 					photoValues: photoValuesCopy,
-					photoValuesChange: !this.state.photoValuesChange
+					photoValuesChange: changeNegate
 				});
 				break;
 			case "companyIndustryEarnings":
 				photoValuesCopy.companyIndustryEarnings = value;
 				this.setState({
 					photoValues: photoValuesCopy,
-					photoValuesChange: !this.state.photoValuesChange
+					photoValuesChange: changeNegate
 				});
 				break;
 			case "growth":
 				photoValuesCopy.growth = value;
 				this.setState({
 					photoValues: photoValuesCopy,
-					photoValuesChange: !this.state.photoValuesChangey
+					photoValuesChange: changeNegate
 				});
 				break;
 			case "earningsSurprises":
 				photoValuesCopy.earningsSurprises = value;
 				this.setState({
 					photoValues: photoValuesCopy,
-					photoValuesChange: !this.state.photoValuesChange
+					photoValuesChange: changeNegate
 				});
 				break;
 		}
