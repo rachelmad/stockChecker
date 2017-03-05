@@ -91,6 +91,12 @@ export default class StockDetails extends Component {
 					<PhotoButtons onUpdate={this.props.onPhotoUpdate}
 								  type="earningsSurprises"></PhotoButtons>
 				</div>
+				<div className="uk-card-footer">
+					<button className="uk-button uk-button-text" 
+							onClick={this.props.onNext}>
+					  Get Analysis
+					</button>
+				</div>
 			</div>
 		);
 	}

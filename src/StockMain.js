@@ -11,13 +11,19 @@ export default class StockMain extends Component {
 		this.state = {
 			stockData: null,
 			showStockDetails: false,
+			showStockAnalysis: false,
 			amount: null,
 			photoValues: {},
-			photoValuesChange: false
+			photoValuesChange: false,
+			analysis: {}
 		}
 
+		this.showStockAnalysisFunc = this.showStockAnalysisFunc.bind(this);
 		this.getData = this.getData.bind(this);
-		this.updatePhotoDetails = this.updatePhotoDetails.bind(this);
+		this.updateAnalysis = this.updateAnalysis.bind(this);
+		this.getAnalysis = this.getAnalysis.bind(this);
+		this.getLowValue = this.getLowValue.bind(this);
+		this.getHighValue = this.getHighValue.bind(this);
 	}
 
 	getData(ticker, amountEntered) {
@@ -31,43 +37,88 @@ export default class StockMain extends Component {
 					showStockDetails: true, 
 					amount: amountEntered
 				});
+				this.getAnalysis();
 			})
 			.fail((jqxhr, textStatus, error) => {
 				console.log(error);
 			});
 	}
 
-	updatePhotoDetails(type, value) {
-		var photoValuesCopy = this.state.photoValues;
-		var changeNegate = !this.state.photoValuesChange;
+	getAnalysis() {
+		var analysisCopy = {
+			pegAnalysis: this.getLowValue(this.state.stockData.PEGRatio, 1, -1, 2),
+			priceVsBookValue: this.getLowValue(this.state.stockData.LastTradePriceOnly, 
+				this.state.stockData.BookValue, 0.5 * this.state.stockData.BookValue, 
+				2 * this.state.stockData.BookValue),
+			dividendAnalysis: this.getHighValue(this.state.stockData.DividendYield, 5, 7, 1),
+			amount: this.state.amount
+		}
+
+		this.setState({
+			analysis: analysisCopy
+		})
+	}
+
+	getHighValue(original, point, veryGood, veryBad) {
+		if (original) {
+			return 0;
+		} else if (original < veryBad) {
+			return -2;
+		} else if (original < point) {
+			return -1;		
+		} else if (original < veryGood) {
+			return 1;
+		} else {
+			return 2;
+		}		 
+	}
+
+	getLowValue(original, point, veryGood, veryBad) {
+		if (original) {
+			return 0;
+		} else if (original > veryBad) {
+			return -2;
+		} else if (original > point) {
+			return -1;		
+		} else if (original > veryGood) {
+			return 1;
+		} else {
+			return 2;
+		}		 
+	}
+
+	showStockAnalysisFunc() {
+		this.setState({
+			showStockAnalysis: true
+		})
+	}
+
+	updateAnalysis(type, value) {
+		var analysisCopy = this.state.analysis;
 
 		switch(type) {
 			case "recommendations":
-				photoValuesCopy.recommendations = value;
+				analysisCopy.recommendations = value;
 				this.setState({
-					photoValues: photoValuesCopy,
-					photoValuesChange: changeNegate
+					analysis: analysisCopy
 				});
 				break;
 			case "companyIndustryEarnings":
-				photoValuesCopy.companyIndustryEarnings = value;
+				analysisCopy.companyIndustryEarnings = value;
 				this.setState({
-					photoValues: photoValuesCopy,
-					photoValuesChange: changeNegate
+					analysis: analysisCopy
 				});
 				break;
 			case "growth":
-				photoValuesCopy.growth = value;
+				analysisCopy.growth = value;
 				this.setState({
-					photoValues: photoValuesCopy,
-					photoValuesChange: changeNegate
+					analysis: analysisCopy
 				});
 				break;
 			case "earningsSurprises":
-				photoValuesCopy.earningsSurprises = value;
+				analysisCopy.earningsSurprises = value;
 				this.setState({
-					photoValues: photoValuesCopy,
-					photoValuesChange: changeNegate
+					analysis: analysisCopy
 				});
 				break;
 		}
@@ -75,16 +126,22 @@ export default class StockMain extends Component {
 
 	render() {
 		var stockDetails = null;
-		var stockAnalysis = null;
 		if (this.state.showStockDetails) {
 			stockDetails = <StockDetails stockData={this.state.stockData} 
-										 onPhotoUpdate={this.updatePhotoDetails}></StockDetails>;
+										 onPhotoUpdate={this.updateAnalysis}
+										 onNext={this.showStockAnalysisFunc}></StockDetails>;
+		} else {
+			stockDetails = null;
+		}
+
+		var stockAnalysis = null;
+		if (this.state.showStockAnalysis) {
 			stockAnalysis = <StockAnalysis stockData={this.state.stockData} 
 										   amount={this.state.amount}
 										   photoValues={this.state.photoValues}
-										   photoValuesChange={this.state.photoValuesChange}></StockAnalysis>;
+										   photoValuesChange={this.state.photoValuesChange}
+										   analysis={this.state.analysis}></StockAnalysis>;
 		} else {
-			stockDetails = null;
 			stockAnalysis = null;
 		}
 
